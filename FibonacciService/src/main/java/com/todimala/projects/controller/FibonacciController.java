@@ -11,17 +11,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.todimala.projects.service.FibonacciService;
 
 @RestController
+@RequestMapping(value = "/fibonacci")
 public class FibonacciController {
 
 	@Autowired
 	FibonacciService fibonacciService;
 	
-	@RequestMapping(value="/getFiboElement", method = RequestMethod.GET) 
+	@RequestMapping(value="/getElement", method = RequestMethod.GET) 
 	public int getNFibonacciNum(@RequestParam(value = "count", required=false, defaultValue = "1") Integer count) throws Exception {		
 		return fibonacciService.getNFibonacciNum(count);	
 	}
 	
-	@RequestMapping(value="/getFiboSer", method = RequestMethod.GET)
+	@RequestMapping(value="/getSeries", method = RequestMethod.GET)
 	public List<Integer> getFibonacciSeries(@RequestParam(value = "count", required=false, defaultValue = "5") Integer count) throws Exception {
 		return fibonacciService.getFibonacciSeries(count);		
 	}
