@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.todimala.CustomerResource;
 import com.github.todimala.entity.Address;
 import com.github.todimala.entity.AddressRepository;
 import com.github.todimala.entity.Customer;
 import com.github.todimala.entity.CustomerRepository;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 @RestController
 @RequestMapping("/customer")
@@ -58,20 +60,32 @@ public class CustomerController {
 		return this.customerRepository.findByLastNameAndFirstName(firstName, lastName);
 	}
 	@RequestMapping(path="/{custId}", method = RequestMethod.GET)
-	public Customer getCustomerByCustomerId(@PathVariable Long custId) {
+	public CustomerResource getCustomerByCustomerId(@PathVariable Long custId) {
 		LOGGER.info("Find customer by Id: " + custId);
-		return this.customerRepository.findOne(custId);
+		Customer cust = this.customerRepository.findOne(custId);
+		return new CustomerResource(cust);
+		//return cust;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Customer addCustomer(@RequestBody Customer customer) {
+	public CustomerResource addCustomer(@RequestBody Customer customer) {
 		LOGGER.info("Adding Customer: " + customer.toString());
-		return this.customerRepository.save(customer);
+		return new CustomerResource(this.customerRepository.save(customer));
 	}
 	
-	@RequestMapping(path="/address", method = RequestMethod.POST)
-	public Address addCustomerAddress(@RequestBody Address address) {
-		LOGGER.info("Adding Customer Address: " + address.toString());
+	@RequestMapping(path="/{custId}/address", method = RequestMethod.POST)
+	public Address addCustomerAddress(@PathVariable Long custId, @RequestBody Address address) {
+		LOGGER.info(String.format("Customer Id %s: Adding Address %s",  custId, address.toString()));
+		Customer cust = this.customerRepository.findOne(custId);
+		address.setCustomer(cust);
 		return this.addressRepository.save(address);
 	}
+	
+	@RequestMapping(path="/{custId}/address", method = RequestMethod.GET)
+	public Address getCustomerAddress(@PathVariable Long custId) {
+		LOGGER.info(String.format("Customer Id %s: Fetching Address",  custId));
+		Customer cust = this.customerRepository.findOne(custId);
+		return cust.getCustomerAddress();
+	}
+	
 }

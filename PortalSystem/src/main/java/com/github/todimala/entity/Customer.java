@@ -1,5 +1,7 @@
 package com.github.todimala.entity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.hateoas.ResourceSupport;
 
 /*
  * Customer Entity to be stored in the DB
@@ -17,17 +21,19 @@ public class Customer {
 
 	@Id
 	@GeneratedValue
+	@Column(name = "ID")
 	private long customerId;
+
 	private String firstName;
 	private String lastName;
 	private String customerEmail1;
 	private String customerEmail2;
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ADDRESS_ID")
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
+	//@JoinColumn(name="ADDRESS_ID")
 	private Address customerAddress;
 	
 	public Customer(String firstName, String lastName) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}

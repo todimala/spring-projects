@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,7 +22,8 @@ public class Address {
 	private long addressId;
 	
 	@JsonIgnore
-	@OneToOne(fetch=FetchType.LAZY, mappedBy="customerAddress")
+	@OneToOne 
+	@JoinColumn(name="CUSTOMER_ID", referencedColumnName = "ID")
 	private Customer customer;
 	private String streetAddress1;
 	private String streetAddress2;
@@ -28,8 +31,17 @@ public class Address {
 	private String country;
 	private String state;
 	
+	public Address() {
+	}
+
 	public long getAddressId() {
 		return addressId;
+	}
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	public String getStreetAddress1() {
 		return streetAddress1;
