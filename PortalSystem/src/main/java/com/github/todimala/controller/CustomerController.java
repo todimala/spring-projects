@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.todimala.CustomerResource;
 import com.github.todimala.entity.Address;
 import com.github.todimala.entity.AddressRepository;
 import com.github.todimala.entity.Customer;
 import com.github.todimala.entity.CustomerRepository;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import com.github.todimala.utilities.CustomerResource;
 
 @RestController
 @RequestMapping("/customer")
@@ -39,19 +38,19 @@ public class CustomerController {
 		return this.customerRepository.findByLastName(lastName);
 	}
 	@RequestMapping(path="/email", method = RequestMethod.GET)
-	public Customer getCustomerByEmail(@RequestParam(value="email") String customerEmail1) {
+	public CustomerResource getCustomerByEmail(@RequestParam(value="email") String customerEmail1) {
 		LOGGER.info("Find customer by email: " + customerEmail1);
 		Optional<Customer> cust = this.customerRepository.findByCustomerEmail1(customerEmail1);
 		if (cust.isPresent()) 
-			return cust.get();
+			return new CustomerResource(cust.get());
 		return null;
 	}
 	@RequestMapping(path="/email/{customerEmail1}", method = RequestMethod.GET)
-	public Customer getCustomerByEmailPathVariable(@PathVariable String customerEmail1) {
+	public CustomerResource getCustomerByEmailPathVariable(@PathVariable String customerEmail1) {
 		LOGGER.info("Find customer by email: " + customerEmail1);
 		Optional<Customer> cust = this.customerRepository.findByCustomerEmail1(customerEmail1);
 		if (cust.isPresent()) 
-			return cust.get();
+			return new CustomerResource(cust.get());
 		return null;
 	}
 	@RequestMapping(path="/{lastName}/{firstName}", method = RequestMethod.GET)
@@ -64,7 +63,6 @@ public class CustomerController {
 		LOGGER.info("Find customer by Id: " + custId);
 		Customer cust = this.customerRepository.findOne(custId);
 		return new CustomerResource(cust);
-		//return cust;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

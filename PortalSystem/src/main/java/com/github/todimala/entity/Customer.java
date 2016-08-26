@@ -1,43 +1,54 @@
 package com.github.todimala.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-import org.springframework.hateoas.ResourceSupport;
 
 /*
  * Customer Entity to be stored in the DB
  */
 @Entity
 @Table(name = "Customer")
-public class Customer {
+public class Customer implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "customerSeq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "customerSeq", sequenceName = "CUSTOMER_SEQ", allocationSize=1)
 	@Column(name = "ID")
 	private long customerId;
 
+	@Column (name = "FIRST_NAME")
 	private String firstName;
+	
+	@Column (name = "LAST_NAME")
 	private String lastName;
+
+	@Column (name = "CUSTOMER_EMAIL1")
 	private String customerEmail1;
+	
+	@Column (name = "CUSTOMER_EMAIL2")
 	private String customerEmail2;
 
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
-	//@JoinColumn(name="ADDRESS_ID")
 	private Address customerAddress;
 	
 	public Customer(String firstName, String lastName) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
+	
 	public Customer() {} // For JPA
+	
 	public String getFirstName() {
 		return firstName;
 	}
