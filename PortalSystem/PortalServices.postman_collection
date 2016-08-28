@@ -30,22 +30,21 @@
 			"id": "01c231c6-c136-271e-aa0c-4735f0bd1cc8",
 			"headers": "Content-Type: application/json\n",
 			"url": "localhost:8090/resourceType",
-			"pathVariables": {},
 			"preRequestScript": null,
+			"pathVariables": {},
 			"method": "POST",
-			"collectionId": "dd4a5aa7-aeaa-372f-e060-5559c8f9a4ee",
 			"data": [],
 			"dataMode": "raw",
-			"name": "PostSUV",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1472277358335,
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"rawModeData": "{\n    \"name\": \"SUV\",\n    \"description\": \"four wheel 2-axle 5 seater motor vehicle\"\n}"
+			"time": 1472371765201,
+			"name": "PostSUV",
+			"description": "",
+			"collectionId": "dd4a5aa7-aeaa-372f-e060-5559c8f9a4ee",
+			"responses": [],
+			"rawModeData": "{\n    \"name\": \"SUV\",\n    \"description\": \"four wheel 2-axle 5 seater motor vehicle\",\n    \"fields\":[\"Make\", \"Model\", \"Year\", \"Style\", \"ExteriorColor\", \"InteriorColor\"]\n}"
 		},
 		{
 			"id": "026bae53-861b-9df0-3d58-ff0e343ce493",
@@ -201,12 +200,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472276709009,
+			"time": 1472369690684,
 			"name": "PostSedan",
 			"description": "",
 			"collectionId": "dd4a5aa7-aeaa-372f-e060-5559c8f9a4ee",
 			"responses": [],
-			"rawModeData": "{\n    \"name\": \"sedan\",\n    \"description\": \"four wheel 2-axle motor vehicle\"\n}"
+			"rawModeData": "{\n    \"name\": \"sedan\",\n    \"description\": \"four wheel 2-axle motor vehicle\",\n    \"fields\":[\"Make\", \"Model\", \"Year\", \"Style\", \"ExteriorColor\", \"InteriorColor\"]\n}"
 		},
 		{
 			"id": "a2693aac-b99f-b5e9-585c-fff49194cfad",
@@ -322,12 +321,12 @@
 			"tests": null,
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1472366580360,
+			"time": 1472372018370,
 			"name": "PostResourceAccord",
 			"description": "",
 			"collectionId": "dd4a5aa7-aeaa-372f-e060-5559c8f9a4ee",
 			"responses": [],
-			"rawModeData": "{\n    \"resourceTypeId\":1,\n    \"name\": \"Accord\"\n    \n}"
+			"rawModeData": "{\n    \"resourceTypeId\":1,\n    \"name\": \"Accord\"\n}"
 		},
 		{
 			"id": "f105171a-d7f1-2115-a5cd-5f4d4218c59b",

@@ -1,8 +1,10 @@
 package com.github.todimala.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +29,10 @@ public class ResourceType implements Serializable {
 	
 	@Column (name = "TYPE_DESCRIPTION")
 	private String description;
+	
+	@Column (name = "FIELDS")
+	@ElementCollection(targetClass=String.class)
+	private List<String> fields;
 	
 	public ResourceType() {} //For JPA
 
@@ -53,6 +59,14 @@ public class ResourceType implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<String> getFields() {
+		return fields;
+	}
+
+	public void setFields(List<String> fields) {
+		this.fields = fields;
 	}
 
 	@Override
