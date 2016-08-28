@@ -16,6 +16,7 @@ import com.github.todimala.entity.Address;
 import com.github.todimala.entity.AddressRepository;
 import com.github.todimala.entity.Customer;
 import com.github.todimala.entity.CustomerRepository;
+import com.github.todimala.entity.ResourceType;
 import com.github.todimala.utilities.CustomerResource;
 
 @RestController
@@ -30,6 +31,13 @@ public class CustomerController {
 	CustomerController(CustomerRepository customerRepository, AddressRepository addressRepository) {
 		this.customerRepository = customerRepository;
 		this.addressRepository = addressRepository;
+	}
+	
+	
+	@RequestMapping(path="/list", method = RequestMethod.GET)
+	public List<Customer> listAll() {
+		LOGGER.info("List all Customers");
+		return this.customerRepository.findAll();
 	}
 	
 	@RequestMapping(path="/lastname/{lastName}", method = RequestMethod.GET)

@@ -27,4 +27,20 @@ public class Resource implements Serializable {
 	
 	public Resource() {} //For JPA
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public ResourceType getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(ResourceType resourceType) {
+		this.resourceType = resourceType;
+	}
+
 }

@@ -19,8 +19,8 @@ public class ResourceType implements Serializable {
 	@Id
 	@GeneratedValue(generator = "resourceTypeSeq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "resourceTypeSeq", sequenceName = "RESOURCE_TYPE_SEQ", allocationSize=1)
-	@Column (name = "ID")
-	private Long Id;
+	@Column (name = "RES_TYPE_ID")
+	private long resTypeId;
 	
 	@Column (name = "TYPE_NAME")
 	private String name;
@@ -29,4 +29,34 @@ public class ResourceType implements Serializable {
 	private String description;
 	
 	public ResourceType() {} //For JPA
+
+	public ResourceType(String name, String description) {
+		this.name = name;
+		this.description = description;
+	}
+	
+	public Long getId() {
+		return resTypeId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "ResourceType [resTypeId=" + resTypeId + ", name=" + name + ", description=" + description + "]";
+	}
 }
