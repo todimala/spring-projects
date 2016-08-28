@@ -22,8 +22,11 @@ public class Resource implements Serializable {
 	@Column(name = "ID")
 	private Long id;
 	
-	@Column (name = "RESOURCE_TYPE")
-	private ResourceType resourceType;
+	@Column (name = "RESOURCE_TYPE_ID")
+	private Long resourceTypeId;
+	
+	@Column (name = "RESOURCE_NAME")
+	private String name;
 	
 	public Resource() {} //For JPA
 
@@ -35,12 +38,25 @@ public class Resource implements Serializable {
 		this.id = id;
 	}
 
-	public ResourceType getResourceType() {
-		return resourceType;
+	public Long getResourceTypeId() {
+		return resourceTypeId;
 	}
 
-	public void setResourceType(ResourceType resourceType) {
-		this.resourceType = resourceType;
+	public void setResourceType(Long resourceTypeId) {
+		this.resourceTypeId = resourceTypeId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Resource [id=" + id + ", resourceTypeId=" + resourceTypeId + ", name=" + name + "]";
 	}
 
 }
